@@ -1,0 +1,25 @@
+---
+title: "Party Identification and Costs of Unilateral Action"
+author: "Sam Schutt"
+date: "April 24, 2019"
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+library(foreign)
+library(car)
+library(SDMTools)
+library(texreg)
+library(plyr)
+library(Zelig)
+library(MASS)
+library(weights)
+library(here)
+library(ggplot2)
+library(pander)
+library(dplyr)
+library(devtools)
+load(here("Replication data/RR-AJPS-taps-processed (3).RData"))
+d<-tapsData
+```
