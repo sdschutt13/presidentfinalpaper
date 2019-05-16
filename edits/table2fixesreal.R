@@ -56,8 +56,9 @@ d1<-d ##extra copy just in case
 
 #####
 
-
-
+#######################
+## CODING NEW MODELS ##
+#######################
 
 #########
 ## POT ##
@@ -200,9 +201,6 @@ pred.alt3pot.hand<-augment(alt3pot.hand,
                            newdata = val.pot.alt.hand)
 
 #####
-
-
-
 
 
 
@@ -350,8 +348,6 @@ pred.alt3tax.hand<-augment(alt3tax.hand,
 
 
 
-
-
 #############
 ## DEFENSE ##
 #############
@@ -491,18 +487,9 @@ pred.alt3def.hand<-augment(alt3def.hand,
 
 #####
 
-
-
-
-
-#########
-## END ##
-#########
-
-
-
-
-#####
+################
+## END CODING ##
+################
 
 ##############
 ## GRAPHICS ##
@@ -515,6 +502,9 @@ pred.alt3def.hand<-augment(alt3def.hand,
 labelpot <- c("-2" = "Strongly Disagree", "-1" = "Disagree", "0" = "Neither", "1" = "Agree", "2" = "Strongly Agree")
 
 #####
+
+
+
 
 #########
 ## POT ##
@@ -649,6 +639,8 @@ pred.alt3pot.hand %>% drop_na() %>%
 
 #####
 
+
+
 #########
 ## TAX ##
 #########
@@ -778,6 +770,10 @@ pred.alt3tax.hand %>% drop_na() %>%
         axis.ticks.y = element_blank(),
         plot.title = element_text(size = 15, face="bold", hjust = 0.5),
         plot.subtitle = element_text(size = 8))
+
+
+
+
 
 #####
 
