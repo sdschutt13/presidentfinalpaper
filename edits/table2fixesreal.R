@@ -14,7 +14,6 @@ packages_required <- c('foreign',
                        'Zelig',
                        'weights',
                        'robust',
-                       'Mass',
                        'pander',
                        'dplyr',
                        'mice',
@@ -48,139 +47,491 @@ load(url("https://github.com/sdschutt13/presidentfinalpaper/raw/master/Replicati
 d<-tapsData ##Faster to type every time, keeps original data safe
 d1<-d ##extra copy just in case
 
-########################
-## POT ORIGINAL MODELS##
-########################
+#########
+## POT ##
+#########
 
-# ORIGINAL CANDIDATE MODEL WITH NO ROBUST #
-pot.candidate.pref.glm <-
+
+################################################
+## POT CANDIDATE MODEL AND ALTERNATIVES W/PID ##
+################################################
+
+
+#####
+# ORIGINAL MODEL CANDIDATE POT # 
+pot.cand.orig <-
   glm(
     pot.candidate.binary ~ treatment2 * pot.attitudes,
-    data = d,
-    weights = oct2015wt1,
-    family = binomial(link = "logit")
-  )
-
-# ORIGINAL HANDLING MODEL WITH NO ROBUST #
-pot.handling.pref.glm <-
-  glm(
-    pot.handling.binary ~ treatment2 * pot.attitudes,
-    data = d,
-    weights = oct2015wt1,
-    family = binomial(link = "logit")
-  )
-
-#######################################################
-## POT CANDIDATE MODEL AND ALTERNATIVES ROBUST W/PID ##
-#######################################################
-
-# ORIGINAL MODEL WITH ROBUST # 
-pot.candidate.orig.rob <-
-  glmRob(
-    pot.candidate.binary ~ treatment2 * pot.attitudes,
-    data = d,
-    weights = oct2015wt1,
-    family = binomial(link = "logit")
-  )
-
-#ALTERNATIVE MODEL 1 #
-alt1pot.candidate.rob <-
-  glmRob(
-    pot.candidate.binary ~ treatment2 * pot.attitudes + pid7,
     data = d,
     weights=oct2015wt1,
     family = binomial(link = "logit"))
 
-#ALTERNATIVE MODEL 2 #
-alt2pot.candidate.rob<-
-    glmRob(
-      pot.candidate.binary ~ treatment2 + pot.attitudes + pid7,
+# ORIGINAL CANDIDATE MODEL PREDICT #
+val.pot<- d %>%
+  expand(treatment2=1,pot.attitudes)
+
+pred.pot.cand.orig<-augment(pot.cand.orig,
+                                    type.predict = "response",
+                                    newdata = val.pot)
+
+#####
+# ALTERNATIVE MODEL 1 CANDIDATE POT #
+alt1pot.cand <-
+  glm(
+    pot.candidate.binary ~ treatment2 * pot.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# CANDIDATE MODEL ALT 1 PREDICT #
+val.pot.alt<- d %>%
+  expand(treatment2=1,pot.attitudes, pid3)
+
+pred.alt1pot.cand<-augment(alt1pot.cand,
+                              type.predict = "response",
+                              newdata = val.pot.alt)
+
+#####
+# ALTERNATIVE MODEL 2 CANDIDATE POT #
+alt2pot.cand<-
+    glm(
+      pot.candidate.binary ~ treatment2 + pot.attitudes + pid3,
       data = d,
       weights=oct2015wt1,
       family = binomial(link = "logit"))
 
-# ALTERNATIVE MODEL 3 #
-alt3pot.candidate.rob <-
-  glmRob(
-    pot.candidate.binary ~ pot.attitudes + pid7,
+# ALTERNATIVE MODEL 2 CANDIDATE PREDICT POT #
+pred.alt2pot.cand<-augment(alt2pot.cand,
+                              type.predict = "response",
+                              newdata = val.pot.alt)
+
+#####
+# ALTERNATIVE MODEL 3 CANDIDATE POT #
+alt3pot.cand <-
+  glm(
+    pot.candidate.binary ~ pot.attitudes + pid3,
     data = d,
     weights=oct2015wt1,
     family = binomial(link = "logit"))
 
-# ALTERNATIVE MODEL 4 #
-alt4pot.candidate.rob <-
-  glmRob(
-    pot.candidate.binary ~ treatment2 * pot.attitudes * pid7,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
+# ALTERNATIVE MODEL 3 CANDIDATE PREDICT POT #
+pred.alt3pot.cand<-augment(alt3pot.cand,
+                           type.predict = "response",
+                           newdata = val.pot.alt)
 
-######################################################
-## POT HANDLING MODEL AND ALTERNATIVES ROBUST W/PID ##
-######################################################
+#####
 
-# ORIGINAL MODEL WITH ROBUST # 
-pot.handle.orig.rob <-
+###############################################
+## POT HANDLING MODEL AND ALTERNATIVES W/PID ##
+###############################################
+
+#####
+# ORIGINAL MODEL HANDLING POT # 
+pot.hand.orig <-
   glm(
     pot.handling.binary ~ treatment2 * pot.attitudes,
     data = d,
-    weights = oct2015wt1,
-    family = binomial(link = "logit")
-  )
-
-#ALTERNATIVE MODEL 1 #
-alt1pot.handle.rob <-
-  glmRob(
-    pot.handling.binary ~ treatment2 * pot.attitudes + pid7,
-    data = d,
     weights=oct2015wt1,
     family = binomial(link = "logit"))
 
-#ALTERNATIVE MODEL 2 #
-alt2pot.handle.rob<-
-  glmRob(
-    pot.handling.binary ~ treatment2 + pot.attitudes + pid7,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
-
-# ALTERNATIVE MODEL 3 #
-alt3pot.handle.rob <-
-  glmRob(
-    pot.handling.binary ~ pot.attitudes + pid7,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
-
-# ALTERNATIVE MODEL 4 #
-alt4pot.handle.rob <-
-  glmRob(
-    pot.handling.binary ~ treatment2 * pot.attitudes * pid7,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
-
-
-
-
-probPot <- function(logit){
-  odds <- exp(logit)
-  prob <- odds / (1 + odds)
-  return(prob)
-}
-
-val.orig<- d %>%
+# ORIGINAL HANDLING MODEL PREDICT POT #
+val.pot.hand<- d %>%
   expand(treatment2=1,pot.attitudes)
 
-predict.original<-augment(pot.candidate.pref.glm,
-                         type.predict = "response",
-                         newdata = val.orig
-                         )
+pred.pot.hand.orig<-augment(pot.hand.orig,
+                            type.predict = "response",
+                            newdata = val.pot.hand)
+
+#####
+# ALTERNATIVE MODEL 1 HANDLING POT #
+alt1pot.hand <-
+  glm(
+    pot.handling.binary ~ treatment2 * pot.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# HANDLING MODEL ALT 1 PREDICT POT #
+val.pot.alt.hand<- d %>%
+  expand(treatment2=1,pot.attitudes, pid3)
+
+pred.alt1pot.hand<-augment(alt1pot.hand,
+                           type.predict = "response",
+                           newdata = val.pot.alt.hand)
+
+#####
+# ALTERNATIVE MODEL 2 HANDLING POT #
+alt2pot.hand<-
+  glm(
+    pot.handling.binary ~ treatment2 + pot.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 2 HANDLING PREDICT POT #
+pred.alt2pot.hand<-augment(alt2pot.hand,
+                           type.predict = "response",
+                           newdata = val.pot.alt.hand)
+
+#####
+# ALTERNATIVE MODEL 3 HANDLING POT #
+alt3pot.hand <-
+  glm(
+    pot.handling.binary ~ pot.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 3 HANDLING PREDICT POT #
+pred.alt3pot.hand<-augment(alt3pot.hand,
+                           type.predict = "response",
+                           newdata = val.pot.alt.hand)
+
+#####
 
 
+
+
+
+
+#########
+## TAX ##
+#########
+################################################
+## TAX CANDIDATE MODEL AND ALTERNATIVES W/PID ##
+################################################
+
+
+#####
+#  TAX ORIGINAL MODEL CANDIDATE # 
+tax.cand.orig <-
+  glm(
+    tax.candidate.binary ~ treatment2 * tax.attitudes,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# TAX ORIGINAL CANDIDATE MODEL PREDICT #
+val.tax<- d %>%
+  expand(treatment2=1,tax.attitudes)
+
+pred.tax.cand.orig<-augment(tax.cand.orig,
+                            type.predict = "response",
+                            newdata = val.tax)
+
+#####
+# ALTERNATIVE MODEL 1 CANDIDATE TAX #
+alt1tax.cand <-
+  glm(
+    tax.candidate.binary ~ treatment2 * tax.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# CANDIDATE MODEL ALT 1 PREDICT TAX #
+val.tax.alt<- d %>%
+  expand(treatment2=1,tax.attitudes, pid3)
+
+pred.alt1tax.cand<-augment(alt1tax.cand,
+                           type.predict = "response",
+                           newdata = val.tax.alt)
+
+#####
+# ALTERNATIVE MODEL 2 CANDIDATE TAX #
+alt2tax.cand<-
+  glm(
+    tax.candidate.binary ~ treatment2 + tax.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 2 CANDIDATE PREDICT TAX #
+pred.alt2tax.cand<-augment(alt2tax.cand,
+                           type.predict = "response",
+                           newdata = val.tax.alt)
+
+#####
+# ALTERNATIVE MODEL 3 CANDIDATE TAX #
+alt3tax.cand <-
+  glm(
+    tax.candidate.binary ~ tax.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 3 CANDIDATE PREDICT TAX #
+pred.alt3tax.cand<-augment(alt3tax.cand,
+                           type.predict = "response",
+                           newdata = val.tax.alt)
+
+#####
+
+
+###############################################
+## TAX HANDLING MODEL AND ALTERNATIVES W/PID ##
+###############################################
+
+#####
+# ORIGINAL MODEL HANDLING TAX # 
+tax.hand.orig <-
+  glm(
+    tax.handling.binary ~ treatment2 * tax.attitudes,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ORIGINAL HANDLING MODEL PREDICT TAX #
+val.tax.hand<- d %>%
+  expand(treatment2=1,tax.attitudes)
+
+pred.tax.hand.orig<-augment(tax.hand.orig,
+                            type.predict = "response",
+                            newdata = val.tax.hand)
+
+#####
+# ALTERNATIVE MODEL 1 HANDLING TAX #
+alt1tax.hand <-
+  glm(
+    tax.handling.binary ~ treatment2 * tax.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# HANDLING MODEL ALT 1 PREDICT TAX #
+val.tax.alt.hand<- d %>%
+  expand(treatment2=1,tax.attitudes, pid3)
+
+pred.alt1tax.hand<-augment(alt1tax.hand,
+                           type.predict = "response",
+                           newdata = val.tax.alt.hand)
+
+#####
+# ALTERNATIVE MODEL 2 HANDLING TAX #
+alt2tax.hand<-
+  glm(
+    tax.handling.binary ~ treatment2 + tax.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 2 HANDLING PREDICT TAX #
+pred.alt2tax.hand<-augment(alt2tax.hand,
+                           type.predict = "response",
+                           newdata = val.tax.alt.hand)
+
+#####
+# ALTERNATIVE MODEL 3 HANDLING TAX #
+alt3tax.hand <-
+  glm(
+    tax.handling.binary ~ tax.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 3 HANDLING PREDICT TAX #
+pred.alt3tax.hand<-augment(alt3tax.hand,
+                           type.predict = "response",
+                           newdata = val.tax.alt.hand)
+
+#####
+
+
+
+
+
+
+#############
+## DEFENSE ##
+#############
+####################################################
+## DEFENSE CANDIDATE MODEL AND ALTERNATIVES W/PID ##
+####################################################
+
+#####
+#  DEFENSE ORIGINAL MODEL CANDIDATE # 
+def.cand.orig <-
+  glm(
+    defense.candidate.binary ~ treatment2 * defense.attitudes,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# DEFENSE ORIGINAL CANDIDATE MODEL PREDICT #
+val.def<- d %>%
+  expand(treatment2=1,defense.attitudes)
+
+pred.def.cand.orig<-augment(def.cand.orig,
+                            type.predict = "response",
+                            newdata = val.def)
+
+#####
+# ALTERNATIVE MODEL 1 CANDIDATE DEFENSE #
+alt1def.cand <-
+  glm(
+    defense.candidate.binary ~ treatment2 * defense.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# CANDIDATE MODEL ALT 1 PREDICT TAX #
+val.def.alt<- d %>%
+  expand(treatment2=1,defense.attitudes, pid3)
+
+pred.alt1def.cand<-augment(alt1def.cand,
+                           type.predict = "response",
+                           newdata = val.def.alt)
+
+#####
+# ALTERNATIVE MODEL 2 CANDIDATE DEFENSE #
+alt2def.cand<-
+  glm(
+    defense.candidate.binary ~ treatment2 + defense.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 2 CANDIDATE PREDICT DEFENSE #
+pred.alt2def.cand<-augment(alt2def.cand,
+                           type.predict = "response",
+                           newdata = val.def.alt)
+
+#####
+# ALTERNATIVE MODEL 3 CANDIDATE DEFENSE #
+alt3def.cand <-
+  glm(
+    defense.candidate.binary ~ defense.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 3 CANDIDATE PREDICT DEFENSE #
+pred.alt3def.cand<-augment(alt3def.cand,
+                           type.predict = "response",
+                           newdata = val.def.alt)
+
+#####
+
 ###################################################
-## TAX ORIGINAL MODELS AND ALTERNATIVES WITH PID ##
+## DEFENSE HANDLING MODEL AND ALTERNATIVES W/PID ##
 ###################################################
+
+#####
+# ORIGINAL MODEL HANDLING DEFENSE # 
+def.hand.orig <-
+  glm(
+    defense.handling.binary ~ treatment2 * defense.attitudes,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ORIGINAL HANDLING MODEL PREDICT TAX #
+val.def.hand<- d %>%
+  expand(treatment2=1,defense.attitudes)
+
+pred.def.hand.orig<-augment(def.hand.orig,
+                            type.predict = "response",
+                            newdata = val.def.hand)
+
+#####
+# ALTERNATIVE MODEL 1 HANDLING DEFENSE #
+alt1def.hand <-
+  glm(
+    defense.handling.binary ~ treatment2 * defense.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# HANDLING MODEL ALT 1 PREDICT DEFENSE #
+val.def.alt.hand<- d %>%
+  expand(treatment2=1,defense.attitudes, pid3)
+
+pred.alt1def.hand<-augment(alt1def.hand,
+                           type.predict = "response",
+                           newdata = val.def.alt.hand)
+
+#####
+# ALTERNATIVE MODEL 2 HANDLING DEFENSE #
+alt2def.hand<-
+  glm(
+    defense.handling.binary ~ treatment2 + defense.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 2 HANDLING PREDICT DEFENSE #
+pred.alt2def.hand<-augment(alt2def.hand,
+                           type.predict = "response",
+                           newdata = val.def.alt.hand)
+
+#####
+# ALTERNATIVE MODEL 3 HANDLING DEFENSE #
+alt3def.hand <-
+  glm(
+    defense.handling.binary ~ defense.attitudes + pid3,
+    data = d,
+    weights=oct2015wt1,
+    family = binomial(link = "logit"))
+
+# ALTERNATIVE MODEL 3 HANDLING PREDICT DEFENSE #
+pred.alt3def.hand<-augment(alt3def.hand,
+                           type.predict = "response",
+                           newdata = val.def.alt.hand)
+
+#####
+
+#########
+## END ##
+#########
+#####
+
+
+
+Logit_bounds <- function(model, Take, Report, Night, Convict){
+  predictions <- rmvnorm(n = 1000, 
+                         mean = model$coefficients, 
+                         sigma = vcov(model)) %>%
+    as_tibble() %>% 
+    # Add a prefix to be clear that these are our betas
+    rename_all(~str_c("beta_", .)) %>% 
+    # z = log odds (the linear combination of predictors)
+    mutate(z = beta_(Intercept) + beta_Take*Take + beta_Report*Report + beta_Night*Night + beta_Convict*Convict) %>% 
+    # p = probabilty. Apply the logistic (inverse logit) function to the log odds
+    mutate(p = 1/(1+exp(-z)) ) %>%
+    # Add values to the data frame
+    mutate(Take = Take,
+           Report = Report,
+           Night = Night,
+           Convict = Convict)
+  return(predictions)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 tax.candidate.pref.glm <-
   glm(
