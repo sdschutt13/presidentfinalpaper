@@ -6,6 +6,11 @@
 
 ## Load necessary packages
 
+################
+## LOAD PACKS ##
+################
+
+#####
 packages_required <- c('foreign',
                        'car',
                        'SDMTools',
@@ -18,7 +23,8 @@ packages_required <- c('foreign',
                        'dplyr',
                        'mice',
                        'tidyr',
-                       'broom')
+                       'broom',
+                       'ggplot2')
 
 for (package in packages_required) {
   if (!(package %in% installed.packages())) {
@@ -39,6 +45,7 @@ library(dplyr)
 library(mice)
 library(tidyr)
 library(broom)
+library(ggplot2)
 
 
 # LOAD IN DATA FROM GIT REPOSITORY #
@@ -46,6 +53,11 @@ library(broom)
 load(url("https://github.com/sdschutt13/presidentfinalpaper/raw/master/Replication%20data/RR-AJPS-taps-processed%20(3).RData"))
 d<-tapsData ##Faster to type every time, keeps original data safe
 d1<-d ##extra copy just in case
+
+#####
+
+
+
 
 #########
 ## POT ##
@@ -479,10 +491,73 @@ pred.alt3def.hand<-augment(alt3def.hand,
 
 #####
 
+
+
+
+
 #########
 ## END ##
 #########
+
+
+
+
 #####
+
+##############
+## GRAPHICS ##
+##############
+
+#########
+## POT ##
+#########
+#####
+## ORIGINAL PREDICTED POT ##
+
+pred.alt1pot.cand %>% 
+  ggplot() + 
+    aes(x = pid3, y = .fitted, color = pid3, na.rm=TRUE) + 
+     geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
+                      ymax = .fitted + 1.96*.se.fit) )  + 
+      coord_flip() +
+      facet_wrap("pot.attitudes", ncol = 1) +
+      labs(y = "Probability", x = "") + 
+      scale_color_discrete() + 
+      theme(axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
