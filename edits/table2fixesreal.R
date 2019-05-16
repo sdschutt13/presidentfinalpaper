@@ -508,8 +508,10 @@ pred.alt3def.hand<-augment(alt3def.hand,
 ## GRAPHICS ##
 ##############
 
+###########
+## SETUP ##
+###########
 #####
-## SET UP FOR GRAPHICS ##
 labelpot <- c("-2" = "Strongly Disagree", "-1" = "Disagree", "0" = "Neither", "1" = "Agree", "2" = "Strongly Agree")
 
 #####
