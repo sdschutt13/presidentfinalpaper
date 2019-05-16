@@ -516,7 +516,7 @@ pred.alt3def.hand<-augment(alt3def.hand,
 
 pred.alt1pot.cand %>% 
   ggplot() + 
-    aes(x = pid3, y = .fitted, color = pid3, na.rm=TRUE) + 
+    aes(x = pid3, y = .fitted, color = pid3) + 
      geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
                       ymax = .fitted + 1.96*.se.fit) )  + 
       coord_flip() +
