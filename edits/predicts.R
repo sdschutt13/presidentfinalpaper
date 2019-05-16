@@ -8,19 +8,18 @@ library(Zelig)
 library(MASS)
 library(weights)
 library(robust)
+library(pander)
 
 ## Set your working directory
 #setwd("~/Dropbox/Articles/legitimacy/outcomes-paper/replication/")
 
-## Load TAPS data
-here("Replication data/RR-AJPS-taps-processed (3).RData")
+## Load T
 
 attach(tapsData)
 
 ###################################################################
 ## Table 2: Policy Preferences and the Effect of Unilateral Action
 ##################################################################
-library(robust)
 pot.candidate.pref.glm <-
   glmRob(
     pot.candidate.binary ~ treatment2 * pot.attitudes,
