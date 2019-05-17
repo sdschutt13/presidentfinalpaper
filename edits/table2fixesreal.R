@@ -576,8 +576,7 @@ pred.alt2pot.cand %>% drop_na() %>%
                      labels = c("Democrats", "Independents", "Republicans")) +
   scale_x_discrete(limits= c("gop", "ind", "dem"),
                    breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
+  theme(axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
         plot.title = element_text(size = 15, face="bold", hjust = 0.5),
         plot.subtitle = element_text(size = 8))
@@ -729,8 +728,7 @@ pred.alt2tax.cand %>% drop_na() %>%
                      labels = c("Democrats", "Independents", "Republicans")) +
   scale_x_discrete(limits= c("gop", "ind", "dem"),
                    breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
+  theme(axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
         plot.title = element_text(size = 15, face="bold", hjust = 0.5),
         plot.subtitle = element_text(size = 8))
