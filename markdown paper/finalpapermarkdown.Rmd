@@ -3,23 +3,15 @@ title: "Party Identification and Costs of Unilateral Action"
 author: "Sam Schutt"
 date: "April 24, 2019"
 output: pdf_document
+abstract: How does public opinion of unilateral action influence Presidential decision-making? Through increased reliance on executive order use to achieve policy goals, Presidents face pressure from both the legislative branch, interest groups, and the public. Using an executive order comes at a cost to his or her relationship with all three of the groups. With the President's role as "steward of the national electorate", the costs of public opinion on executive order usage are certainly a part of the calculation into whether they choose to use it. Using experimental data collected by Reeves and Rogowski (2018), I show that 
+
 ---
 
 
+
 ```{r setup, include=FALSE}
-library(foreign)
-library(car)
-library(SDMTools)
-library(texreg)
-library(plyr)
-library(Zelig)
-library(MASS)
-library(weights)
-library(here)
-library(ggplot2)
-library(pander)
-library(dplyr)
-library(devtools)
-load(here("Replication data/RR-AJPS-taps-processed (3).RData"))
-d<-tapsData
+
 ```
+
+During the past two decades, Presidents have sought to overcome the crippling partisanship in Congress, which prevents passage of important policy implications, through their use of executive orders. The costs of such usage are often suggested to be a drop in public opinion support (CITE), less bartering ability with Congress (CITE), and worsened electoral outcomes (CITE). However, the cost of using executive orders (EOs henceforth) on public opinion plays the largest role in decision-making due to the electoral connection between the President and the nation of individuals.
+

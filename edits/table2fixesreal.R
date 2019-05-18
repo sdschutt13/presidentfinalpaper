@@ -87,6 +87,7 @@ pred.pot.cand.orig<-augment(pot.cand.orig,
                                     type.predict = "response",
                                     newdata = val.pot)
 
+
 #####
 # ALTERNATIVE MODEL 1 CANDIDATE POT #
 alt1pot.cand <-
@@ -104,6 +105,13 @@ pred.alt1pot.cand<-augment(alt1pot.cand,
                               type.predict = "response",
                               newdata = val.pot.alt)
 
+val.pot.altTEST<- d %>%
+  expand(treatment2=0,pot.attitudes, pid3)
+
+pred.alt1pot.candTEST<-augment(alt1pot.cand,
+                           type.predict = "response",
+                           newdata = val.pot.altTEST)
+
 #####
 # ALTERNATIVE MODEL 2 CANDIDATE POT #
 alt2pot.cand<-
@@ -117,20 +125,6 @@ alt2pot.cand<-
 pred.alt2pot.cand<-augment(alt2pot.cand,
                               type.predict = "response",
                               newdata = val.pot.alt)
-
-#####
-# ALTERNATIVE MODEL 3 CANDIDATE POT #
-alt3pot.cand <-
-  glm(
-    pot.candidate.binary ~ pot.attitudes + pid3,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
-
-# ALTERNATIVE MODEL 3 CANDIDATE PREDICT POT #
-pred.alt3pot.cand<-augment(alt3pot.cand,
-                           type.predict = "response",
-                           newdata = val.pot.alt)
 
 #####
 
@@ -187,20 +181,7 @@ pred.alt2pot.hand<-augment(alt2pot.hand,
                            newdata = val.pot.alt.hand)
 
 #####
-# ALTERNATIVE MODEL 3 HANDLING POT #
-alt3pot.hand <-
-  glm(
-    pot.handling.binary ~ pot.attitudes + pid3,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
 
-# ALTERNATIVE MODEL 3 HANDLING PREDICT POT #
-pred.alt3pot.hand<-augment(alt3pot.hand,
-                           type.predict = "response",
-                           newdata = val.pot.alt.hand)
-
-#####
 
 
 
@@ -261,20 +242,7 @@ pred.alt2tax.cand<-augment(alt2tax.cand,
                            newdata = val.tax.alt)
 
 #####
-# ALTERNATIVE MODEL 3 CANDIDATE TAX #
-alt3tax.cand <-
-  glm(
-    tax.candidate.binary ~ tax.attitudes + pid3,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
 
-# ALTERNATIVE MODEL 3 CANDIDATE PREDICT TAX #
-pred.alt3tax.cand<-augment(alt3tax.cand,
-                           type.predict = "response",
-                           newdata = val.tax.alt)
-
-#####
 
 
 ###############################################
@@ -326,20 +294,6 @@ alt2tax.hand<-
 
 # ALTERNATIVE MODEL 2 HANDLING PREDICT TAX #
 pred.alt2tax.hand<-augment(alt2tax.hand,
-                           type.predict = "response",
-                           newdata = val.tax.alt.hand)
-
-#####
-# ALTERNATIVE MODEL 3 HANDLING TAX #
-alt3tax.hand <-
-  glm(
-    tax.handling.binary ~ tax.attitudes + pid3,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
-
-# ALTERNATIVE MODEL 3 HANDLING PREDICT TAX #
-pred.alt3tax.hand<-augment(alt3tax.hand,
                            type.predict = "response",
                            newdata = val.tax.alt.hand)
 
@@ -404,20 +358,7 @@ pred.alt2def.cand<-augment(alt2def.cand,
                            newdata = val.def.alt)
 
 #####
-# ALTERNATIVE MODEL 3 CANDIDATE DEFENSE #
-alt3def.cand <-
-  glm(
-    defense.candidate.binary ~ defense.attitudes + pid3,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
 
-# ALTERNATIVE MODEL 3 CANDIDATE PREDICT DEFENSE #
-pred.alt3def.cand<-augment(alt3def.cand,
-                           type.predict = "response",
-                           newdata = val.def.alt)
-
-#####
 
 ###################################################
 ## DEFENSE HANDLING MODEL AND ALTERNATIVES W/PID ##
@@ -472,20 +413,7 @@ pred.alt2def.hand<-augment(alt2def.hand,
                            newdata = val.def.alt.hand)
 
 #####
-# ALTERNATIVE MODEL 3 HANDLING DEFENSE #
-alt3def.hand <-
-  glm(
-    defense.handling.binary ~ defense.attitudes + pid3,
-    data = d,
-    weights=oct2015wt1,
-    family = binomial(link = "logit"))
 
-# ALTERNATIVE MODEL 3 HANDLING PREDICT DEFENSE #
-pred.alt3def.hand<-augment(alt3def.hand,
-                           type.predict = "response",
-                           newdata = val.def.alt.hand)
-
-#####
 
 ################
 ## END CODING ##
@@ -606,55 +534,6 @@ pred.alt2pot.hand %>% drop_na() %>%
         plot.subtitle = element_text(size = 8))
 
 #####
-## ALTERNATIVE 3 PREDICTED POT CANDIDATE ##
-
-pred.alt3pot.cand %>% drop_na() %>%
-  ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
-  coord_flip() +
-  facet_wrap("pot.attitudes", ncol = 1, labeller = labeller("pot.attitudes" = labelpot)) +
-  labs(y = "Probability of Support for Candidate", x = "Support for Marijuana Legalization") + 
-  labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Pot\n Support of Candidate", 
-       subtitle = "Alternative Model 3 Pot - Candidate")+
-  scale_color_manual(limits= c("dem", "ind", "gop"), 
-                     values = c("dodgerblue3", "purple3", "red4"), 
-                     labels = c("Democrats", "Independents", "Republicans")) +
-  scale_x_discrete(limits= c("gop", "ind", "dem"),
-                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
-        plot.subtitle = element_text(size = 8))
-
-#####
-## ALTERNATIVE 3 PREDICTED POT HANDLING ##
-
-pred.alt3pot.hand %>% drop_na() %>%
-  ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
-  coord_flip() +
-  facet_wrap("pot.attitudes", ncol = 1, labeller = labeller("pot.attitudes" = labelpot)) +
-  labs(y = "Probability of Support for Handling", x = "Support for Marijuana Legalization") + 
-  labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Pot\n Support of Candidate's Handling", 
-       subtitle = "Alternative Model 3 Pot - Handling")+
-  scale_color_manual(limits= c("dem", "ind", "gop"), 
-                     values = c("dodgerblue3", "purple3", "red4"), 
-                     labels = c("Democrats", "Independents", "Republicans")) +
-  scale_x_discrete(limits= c("gop", "ind", "dem"),
-                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
-        plot.subtitle = element_text(size = 8))
-
-
-#####
 
 
 
@@ -758,67 +637,6 @@ pred.alt2tax.hand %>% drop_na() %>%
         plot.subtitle = element_text(size = 8))
 
 #####
-## ALTERNATIVE 3 PREDICTED TAX CANDIDATE ##
-
-pred.alt3tax.cand %>% drop_na() %>%
-  ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
-  coord_flip() +
-  facet_wrap("tax.attitudes", ncol = 1, labeller = labeller("tax.attitudes" = labelpot)) +
-  labs(y = "Probability of Support for Candidate", x = "Support for Taxing Corporations") + 
-  labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Tax\n Support of Candidate", 
-       subtitle = "Alternative Model 3 Taxes - Candidate")+
-  scale_color_manual(limits= c("dem", "ind", "gop"), 
-                     values = c("dodgerblue3", "purple3", "red4"), 
-                     labels = c("Democrats", "Independents", "Republicans")) +
-  scale_x_discrete(limits= c("gop", "ind", "dem"),
-                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
-        plot.subtitle = element_text(size = 8))
-
-#####
-## ALTERNATIVE 3 PREDICTED TAX HANDLING ##
-
-pred.alt3tax.hand %>% drop_na() %>%
-  ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
-  coord_flip() +
-  facet_wrap("tax.attitudes", ncol = 1, labeller = labeller("tax.attitudes" = labelpot)) +
-  labs(y = "Probability of Support for Handling", x = "Support for Taxing Corporations") + 
-  labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Tax\n Support of Candidate's Handling", 
-       subtitle = "Alternative Model 3 Taxes - Handling")+
-  scale_color_manual(limits= c("dem", "ind", "gop"), 
-                     values = c("dodgerblue3", "purple3", "red4"), 
-                     labels = c("Democrats", "Independents", "Republicans")) +
-  scale_x_discrete(limits= c("gop", "ind", "dem"),
-                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
-        plot.subtitle = element_text(size = 8))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#####
 
 
 
@@ -920,56 +738,6 @@ pred.alt2def.hand %>% drop_na() %>%
         axis.ticks.y = element_blank(),
         plot.title = element_text(size = 15, face="bold", hjust = 0.5),
         plot.subtitle = element_text(size = 8))
-
-#####
-## ALTERNATIVE 3 PREDICTED DEFENSE CANDIDATE ##
-
-pred.alt3def.cand %>% drop_na() %>%
-  ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
-  coord_flip() +
-  facet_wrap("defense.attitudes", ncol = 1, labeller = labeller("defense.attitudes" = labelpot)) +
-  labs(y = "Probability of Support for Candidate", x = "Support for Defense Spending") + 
-  labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Defense\n Support of Candidate", 
-       subtitle = "Alternative Model 3 Defense - Candidate")+
-  scale_color_manual(limits= c("dem", "ind", "gop"), 
-                     values = c("dodgerblue3", "purple3", "red4"), 
-                     labels = c("Democrats", "Independents", "Republicans")) +
-  scale_x_discrete(limits= c("gop", "ind", "dem"),
-                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
-        plot.subtitle = element_text(size = 8))
-
-
-#####
-## ALTERNATIVE 3 PREDICTED TAX HANDLING ##
-
-pred.alt3def.hand %>% drop_na() %>%
-  ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
-  coord_flip() +
-  facet_wrap("defense.attitudes", ncol = 1, labeller = labeller("defense.attitudes" = labelpot)) +
-  labs(y = "Probability of Support for Candidate", x = "Support for Defense Spending") + 
-  labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Defense\n Support of Candidate", 
-       subtitle = "Alternative Model 3 Defense - Handling")+
-  scale_color_manual(limits= c("dem", "ind", "gop"), 
-                     values = c("dodgerblue3", "purple3", "red4"), 
-                     labels = c("Democrats", "Independents", "Republicans")) +
-  scale_x_discrete(limits= c("gop", "ind", "dem"),
-                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
-        plot.subtitle = element_text(size = 8))
-
 
 #####
 
