@@ -1,9 +1,13 @@
 ---
-title: "Party Identification and Costs of Unilateral Action"
+title: "Conditional Support of Unilateral Action"
 author: "Sam Schutt"
 date: "April 24, 2019"
+font-family: Times New Roman
+fontsize: 12pt
+header-includes:
+    - \usepackage{setspace}\doublespacing
 output: pdf_document
-abstract: How does public opinion of unilateral action influence Presidential decision-making? Through increased reliance on executive order use to achieve policy goals, Presidents face pressure from both the legislative branch, interest groups, and the public. Using an executive order comes at a cost to his or her relationship with all three of the groups. With the President's role as "steward of the national electorate", the costs of public opinion on executive order usage are certainly a part of the calculation into whether they choose to use it. Using experimental data collected by Reeves and Rogowski (2018), I show that 
+abstract: How does public opinion of unilateral action influence Presidential decision-making? Through increased reliance on executive order use to achieve policy goals, Presidents face pressure from both the legislative branch, interest groups, and the public. Using an executive order comes at a cost to his or her relationship with all three of the groups. With the President's role as "steward of the people" (Teddy Roosevelt), the costs of public opinion on executive order usage are certainly a part of the calculation into whether they choose to use it. Using experimental data collected by Reeves and Rogowski (2018), the findings indicate that partisanship plays an important role in determining whether someone supports unilateral action. A new theory is proposed that attempts to define under what conditions presidents should expect public opinion consequences. 
 
 ---
 
@@ -12,6 +16,116 @@ abstract: How does public opinion of unilateral action influence Presidential de
 ```{r setup, include=FALSE}
 
 ```
+##Introduction
 
-During the past two decades, Presidents have sought to overcome the crippling partisanship in Congress, which prevents passage of important policy implications, through their use of executive orders. The costs of such usage are often suggested to be a drop in public opinion support (CITE), less bartering ability with Congress (CITE), and worsened electoral outcomes (CITE). However, the cost of using executive orders (EOs henceforth) on public opinion plays the largest role in decision-making due to the electoral connection between the President and the nation of individuals.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; During the past two decades, Presidents have sought to overcome the partisan gridlock in Congress, which prevents passage of important policy agenda items, through their use of executive orders. The costs of such usage are often suggested to be a decrease in public opinion or support (Reeves and Rogowski 2018; Krause and Cohen 1997), or less bartering ability with Congress (Kernell 1997; Kiewiet and McCubbins 1985). However, the cost of using executive orders (EOs henceforth) on public opinion plays the largest role in decision-making due to the electoral connection between the President and the nation of individuals.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Unilateral action often to the behest of congressional representatives as a gross overreach of power, or a lack of adherence to the constitution and its norms (Deering and Maltzman 1999). Congress can often be seen making these public outcries to the electorate; often calling for the President to work with Congress or trying to cast doubt on the legitimacy of EOs that they disagree with. However, the modern institution of the President has not been reluctant to continue using EOs to produce favorable outcomes for themselves. To best understand the purpose in Congress making these outcries about Presidential abuse of power, it is most realistic to accept that these are attempts to negatively affect the EO’s public support, or the President’s approval. The question remains: Does the public listen?
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Due to the constant nature of gridlock, the public can find satisfaction in a process of legislating that requires little debate and can instigate immediate changes in government functioning. Relying on EOs has become a tool that is used by Presidents to complete their policy agenda without the inclusion of the legislative branch. How presidents decide when and how to use EOs has always been an important part of the presidential literature. However, most previous work has failed to include public opinion in unilateral action calculus by the President. This has led to new research that includes this factor within their models (Christenson and Kriner 2017; Reeves and Rogowski 2015, 2016, 2018). These new works have not produced a clear answer to the effects of public opinion on unilateral action as a tool, or on specific policy of EOs. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many different variables can play a role in whether a person agrees or disagrees with unilateral action. All recent works agree that partisanship, policy attitudes, and concerns over constitutionality of the action play a varying importance in individual support for EOs. Disagreement remains as to which factor should be taken most seriously when attempting to establish whether unilateral action usage is consequential to the public support of the President (Reeves and Rogowski 2016). 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; There is a paradigm that exists in Presidential behavior with regards to unilateral action. If a president suffers negative, long-term public opinion effect due to an EO, then we should expect that usage would become a more-rare phenomenon. However, if a President does not suffer consequences in approval, we should expect unwavering reliance on unilateral action as a tool of legislating. Neither of these cases accurately describes the current state of how the executive branch acts. This signals that there are conditions under which Presidents do and do not suffer consequences when it comes to their dependence on executive orders. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; With the behavioral paradigm in presidential use of unilateral action, there also seems to be a public opinion conundrum. The Presidency is an impossible-to-please position in the US Government. Through public opinion polls it is shown that the public has distaste for strong executive power and its use (Mansfield 1989), yet also expects the president to get things done (Dickerson 2018). Everything from slow response to crises, bad weather, and even sports teams losing can have negative effects on the President’s public approval (Achen and Bartels 2002). The President must produce policy, but not by using executive power, and when it does not get completed through Congress, he or she will suffer the public approval punishment.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Among the most important problems that the President must address, are issues that their party brought attention to during the election. Ownership over issues allows parties and the President to create a brand or gain a reputation for being the party best at handling the issue (Petrocik 1996). Once in office, it is important for the President to act on issues that his or her party owns to both maintain their possession and to better their electoral outcomes. Issues that are owned are consistently the most salient and most tangible to the mass public. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When tallying all the expectations of the President, and what the public expects him to produce, the top of the President’s policy agenda will be the issues owned by the party. Through issue ownership the President provides a policy agenda to the public as to what they think is the most important problems facing the United States. Issues chosen by the parties regularly are issues that the party members see as important and want addressed. However, the issue ownership does not only cue co-partisans, but also provides the opposition with what to expect if the opponent wins. Both recognize that issues that the candidates focus on, will likely result in those leaders acting on the respective topics if they win the presidency. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In office, the elected President will choose to speak out about important issues, that are frequently the issues that their party owned during the election. By going public (Kernell 1997, Neustadt 1960), the president ultimately seeks to fulfill the policy promises made during the campaign. The issues that the President goes public with are initially meant to be handled in the legislative branch. However, by promoting the policy outcome most desirable to the President, the executive branch signals that they will act, if necessary, through unilateral action.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The next section will focus solely on the new theory that combines issue ownership with unilateral action to provide a conditional arugment for unilateral action usage. Second, a literature review of relevant scholarship will be presented. Following the literature review, a methods section is provided with preliminary data that provides a foundation for future theory-specific data to be collected and analyzed. Included in this section is a brief research design for how the data needed to test the theory, could be composed. Finally, a conclusions section is provided that ties together all the sections of this research paper. 
+
+##Theory
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Presented is a first (and rough) draft of a theory that accompanies the debate between Christenson and Kriner, and Reeves and Rogowski. This disagreement revolves around the consequences or advantages of unilateral action. The summarization of this strain of literature is provided in the Literature Review section. On one side, it is argued that the President is benefitted by copartisans backing when using unilateral action, and it acts to rile the base of support (Christenson and Kriner). 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Opposite this argument is that the president suffers public support consequences when using unilateral action to achieve policy outcomes, no matter the issue and no matter the issue attitude of the individuals. Development of a middle-of-the-road approach is the ultimate goal of the new theory provided.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Addressing the question: How does public opinion influence unilateral action by the president? I present a conditional argument under which the president makes calculations. The main factors that are apart of the calculus to use unilateral action or not: 
+
+>1.	Party reputation handling an issue
+>2.	Copartisan support of the issue
+>3.	Public support of the issue
+>4.	Congressional action on the issue
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; These conditions are relevant among salient problems in the United States, where the public is aware of both the background of why the issue is important, as well as the policy options presented. When deciding whether to use unilateral action, the president will consider all four of the stated conditions. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For a president to not have long-term negative effects of unilateral action, the issue must be salient and the executive must **(1)**own the issue they are legislating on, **(2)**have majority of the party’s support on the issue, **(3)**have a majority of the electorate’s support on the issue, and **(4)**have had non-action from Congress on the issue. Wherefore the President meets this criterion, copartisans’ support will not decline in the short or long-term, and non-copartisans’ support will decline in the short-term but return to pre-unilateral action support in the long-term, all else being equal. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copartisans have this reaction because the issue that the President acts on was supported by the party, owned by the party, action was taken, and overall the policy outcome is liked. There would be no long-term effects simply because public information is low for current events, and even lower for past-events (Pew 2011, 2012, 2013, 2014). Copartisans will remember the success of the policy change, not the mechanism by which it was achieved.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Non-copartisans have a short-term negative reaction to presidential use of unilateral action because of their party affiliation. Short-term effects exist because salience of how an issue was acted on is most important in the direct time frame after its occurrence. Long-term support will remain in-tact because a majority of the country supported the issue acted on, and the non-copartisan knew, due to both issue ownership and going public, that the issue was important to the President. The expectation is that the President will act on policy agenda items, and the policy agenda is well known to the American people, whether they agree or not.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; People care about the outcome of policy debates, not the mechanism through which the outcome is produced. When primed with unilateral action compared to cooperation, it is socially desirable for respondents to prefer cooperation. However, copartisans of the president already support the policy outcome of a prospective unilateral action, and therefore would not punish the president for succeeding in changing a policy. Additionally, the policy would have already been apart of the party’s policy agenda. If Congress does not take the appropriate action on the issue, the President is left with the option to either fail at producing a change or using unilateral action to achieve it. Copartisans prefer policy success over the means to which it was achieved—providing the main causal mechanism for the theory. 
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Non-copartisans will punish the President in the short-term no matter the specific policy attitude of the individual. There will not be long-term political support effects because non-copartisans understand that there are spoils of winning the Presidency. Because the president made clear the importance of an issue, and their desired policy outcome, the non-partisans expect action on the issue because they understand the costs of losing an election. Post-unilateral action, support among non-copartisans of the president will return to support levels pre-action, all else being equal. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Conversely, if the president issues a unilateral action on an issue without the conditions being met, the expectation is that there will be short-term consequences, and well as long-term consequences. The short-term dips in public support will come from both the copartisans and non-partisans. Long-term effects of unilateral action, particularly when less than a majority of the electorate does not support the issue, will be seen in the non-copartisans of the President. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A few key distinctions exist in this theory with regards to the previous work that has been done on the topic of unilateral action and public opinion. The first is the intentional omittance of policy attitude as a direct measure. Presidents act rationally, and through this rationality, they do not make decisions that are calculated to be harmful to their electoral success, or their party. With this assumption, it is fair to accept that unilateral action that the President takes, will not contrast with the public opinion of his copartisans. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Therefore, policy attitude and the realm of issues that a president would take unilateral action on are extremely correlated at the aggregate level. As shown later in the methods section, issues in the experiments done by Reeves and Rogowski, show clear partisan support even when a candidate in the experiment is not given a party label. Further evidence can be found in the Appendix (FIGURE XXX) where the models provided only marginally improve when including both policy attitude and party identification, as compared to including one or the other. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The second deviation with the current literature comes with the dissection of political time between short-term and long-term effects. Through the experiments, I believe that Reeves and Rogowski (2016, 2018) were simply capturing partisan, issue, primed, short-term effects due to the nature of their design. While this method does show a pure relationship between opinion of unilateral action and negative public opinion of the candidate, it leaves out important real-world decision-making habits of individuals from their models; such as partisan identification, and political information—both of which are addressed in my theory.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Finally, as describe significantly more in-depth in a proposed research design section, I intend to use real-world examples of salient executive orders and public opinion polls to draw conclusions and analyze the theory put forward in this paper. From briefly looking over a few of the most important issues of the last quarter-century, there is reason to believe that the theory will hold true at face-value, but no conclusions can be drawn without methodological proof and analysis.
+
+
+
+##Relevant Literature
+
+####Unilateral Action and the Public
+
+
+
+
+
+####Public Appeals and Issue Ownership
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
