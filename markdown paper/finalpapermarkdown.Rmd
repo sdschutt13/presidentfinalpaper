@@ -7,7 +7,7 @@ fontsize: 12pt
 header-includes:
     - \usepackage{setspace}\doublespacing
 output: pdf_document
-abstract: How does public opinion of unilateral action influence Presidential decision-making? Through increased reliance on executive order use to achieve policy goals, Presidents face pressure from both the legislative branch, interest groups, and the public. Using an executive order comes at a cost to his or her relationship with all three of the groups. With the President's role as "steward of the people" (Teddy Roosevelt), the costs of public opinion on executive order usage are certainly a part of the calculation into whether they choose to use it. Using experimental data collected by Reeves and Rogowski (2018), the findings indicate that partisanship plays an important role in determining whether someone supports unilateral action. A new theory is proposed that attempts to define under what conditions presidents should expect public opinion consequences. 
+abstract: How does unilateral action influence public opinion? Through increased reliance on unilateral action to achieve policy goals, Presidents face pressure from judicial branch, legislative branch, and the public. Utilizing this tool comes at a cost to his or her relationship with all three of the groups. With the President's role as "steward of the people" (Teddy Roosevelt), the costs of public opinion on executive order usage are certainly part of the calculation into whether they choose to use it. Using experimental data collected by Reeves and Rogowski (2018), the findings indicate that partisanship plays an important role in determining whether someone supports unilateral action. A new theory is proposed for future discovery, that attempts to define under what conditions presidents should expect public opinion consequences.  
 
 ---
 
@@ -37,13 +37,119 @@ abstract: How does public opinion of unilateral action influence Presidential de
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In office, the elected President will choose to speak out about important issues, that are frequently the issues that their party owned during the election. By going public (Kernell 1997, Neustadt 1960), the president ultimately seeks to fulfill the policy promises made during the campaign. The issues that the President goes public with are initially meant to be handled in the legislative branch. However, by promoting the policy outcome most desirable to the President, the executive branch signals that they will act, if necessary, through unilateral action.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The next section will focus solely on the new theory that combines issue ownership with unilateral action to provide a conditional arugment for unilateral action usage. Second, a literature review of relevant scholarship will be presented. Following the literature review, a methods section is provided with preliminary data that provides a foundation for future theory-specific data to be collected and analyzed. Included in this section is a brief research design for how the data needed to test the theory, could be composed. Finally, a conclusions section is provided that ties together all the sections of this research paper. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I present an initial theory that argues for inclusion of party identification within the model shown in Reeves and Rogowski (2018). It is hypothesized that when including party identification, the effects of the treatment are reduced or removed. Additionally, the data shows high correlation between support and party affiliation, which signals that the experiment did not achieve internal validity when attempting to remove the effects of party from their dependent variable.
 
-##Theory
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the next section I provide a relevant literature review. Second, I offer a very brief initial theoretical section that then is test using the data currently available (Reeves and Rogowski 2018). Finally, I present a new theory for future consideration that highlights the strengths and weaknesses in the current state of the literature regarding public opinion and unilateral action.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Presented is a first (and rough) draft of a theory that accompanies the debate between Christenson and Kriner, and Reeves and Rogowski. This disagreement revolves around the consequences or advantages of unilateral action. The summarization of this strain of literature is provided in the Literature Review section. On one side, it is argued that the President is benefitted by copartisans backing when using unilateral action, and it acts to rile the base of support (Christenson and Kriner). 
+##Relevant Literature
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Opposite this argument is that the president suffers public support consequences when using unilateral action to achieve policy outcomes, no matter the issue and no matter the issue attitude of the individuals. Development of a middle-of-the-road approach is the ultimate goal of the new theory provided.
+####Unilateral Action and the Public
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modern presidents and the modern presidency have been greatly defined by the institutionalization and growth of executive power in the United States (Moe and Howell 1999; Howell 2003). With the growth of unilateral powers, two other branches of government cede power to the executive and have done so with little argument. The ability for the President of the United States to act unilaterally has become a common tactic for achieving desired political outcomes. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Adjusting to the new way of governing leaves some scholars fearful of the expansion of power. However, there are also scholars who seek to address why the use of unilateral action has been so limited, given the nature of ease with unilateral action in the government (Christenson and Kriner 2015). A key assumption made by all researchers on the matter of constraints to unilateral action: Presidents do not wield unlimited scope with their ability (Christenson and Kriner 2015, 2016, 2017a, 2017b; Krause and Cohen 1997; Reeves 2011; Reeves and Rogowski 2015, 2016, 2018; Rottinghaus and Warber 2015). 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Armed with an incredibly weak ability to formally punish the chief executive, Congress and the Courts are regularly sidelined in favor of unilateral action. Understanding that the president does not have boundless choice, but does have vast unchecked power at his disposal provides an interesting conundrum: What constrains presidential unilateral action?
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Previous scholarship has oft narrowed on the institutional checks and balances of unilateral action use, such as divided government (Fine and Warber 2012), legislative branch constraints (Deering and Maltzman 1999; Mayer 1999, 2001), and the issue focused unilateral action (Mayer 2001; Marshall and Parcelle 2005). Until recently, the importance of public opinion as the main constraint to unilateral action has been sparse in the traditional literature. This paucity of public opinion’s importance has been built on in recent work addressing how it constrains presidential action.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Correspondingly, public opinion is recurrently thought to reflect peoples’ fear about tyranny and unchecked presidential power. Hence, presidents are constrained, or suffer consequences after, due to this fear. Tangible effects of support for unilateral powers has been at the center of the debate on how public opinion influences unilateral action (Christenson and Kriner 2017a, 2017b; Reeves and Rogowski 2016, 2018). Narrowly focusing on unilateral powers public support, while omitting contextual information, does not allow the experimenter the ability to apply the effects of support on power, to real-time usage.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Presidents who have wide popularity can extend their power to further lengths than those who do not have strong public support behind them (Thrower 2017; Jacobson 2003). Likewise, issues that have vast support for one side or the other allow the president more room to navigate using executive action because of the ability to claim majoritarian principals, and lack of response by Congress. The processes through which policy is made has most commonly been tested on the judicial (Gibson 1989) and legislative branch (Hibbing and Theiss-Morse 2002). 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Argued in Kriner (2015), presidents can and do use executive orders and action to benefit groups that are politically important to their electoral success. Through using their institutional (and oft unchecked) powers, presidents can better their own political outcomes. Use in this capacity is seen as a way to “rile the base” of support because the groups that benefit remember the deed, while the groups that disagreed end up forgetting about it or find something else to dwell on. Important to note is that presidents will only act on issues that their base of support already sees as important, which sheds light onto the condition of issue ownership by the President’s party.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prior literature has sought to determine the nature of voter’s response to unilateral action (eg Christenson and Kriner, and Reeves and Rogowski) outside of the real political context, except for minor exploration in Reeves and Rogowski (2018). Formalizing the conditions under which Presidents suffer public approval consequences for unilateral action, and when they do not, it critical to the development of this brand of literature.
+
+
+
+
+####Public Appeals and Issue Ownership
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public appeals have long been a tool of presidential power (Neustadt 1960; Kernell 1997; Canes-Wrone 2001), where a leader presents their issue stance to the public in an effort to sway public opinion towards his or her desired policy outcome. Consideration of the public’s opinion on policy is important to the decision-making calculus of all who are elected, but the President has a special connection to their electorate because they are the only nationally elected representative of the people. Public appeals often are used in an attempt to overcome a stubborn Congress or set a policy agenda by drawing attention to an issue.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Through the use of issue ownership during campaigns, and going public once in office, the President can both set the agenda and prioritize items of the most importance to their administration. Copartisans are those most likely to support the President on issues and do support the desired policy outcome that are shared by the party and the president. These issues are salient to the masses, and often could be considered “polarizing” matters (Jacobson 2003).
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Going public with critiques of the other branch’s handling of issues, or with qualms over the time being taken to complete a task can help guide voter’s to placing blame on the legislative branch. Additionally, it provides the President justification for acting unilaterally to achieve a popular policy. Many studies have signaled that political leaders habitually reach out to the public to try to shape public opinion on policies (eg Jacobs and Shapiro 2001).
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Strategically, going public can prime the public to the President’s opinion and grit towards an issue. Their stamina both allows voters to prepare for a change, provides transparency in what the President wants completed and in doing so leaves no confusion around the action he is willing to take. Many scholars have found that change often elicits a fear reaction from individuals (Barbalet 1995 for instance); however, when clearly stated and transparent about an action that will cause change, those effects can be decreased. Simply, people have shock-induced fear when changes occur if they had not expected it. By showing his figurative hand on a policy change sought after, the President lowers the shock-effect that comes from the change. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The theory behind issue ownership allows for voters to keep a tally that establishes party reputation for handling issues and issue areas. Petrocik (1996) presented the idea that parties, over time and with effort, can establish a reputation in the populace that distinguishes their ability to handle issues. An example of this would be the Democratic Party and healthcare or Republicans and terrorism. By establishing themselves as better at handling, voters then can decide, based on their most important issues, which brand they want to choose during the campaign.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To build this status as a candidate, the repeated priming and focus on the issue allows people to establish the connection (Petrocik et al 2004). Through their intentional ownership of an issue, the media then focuses on statements regarding the issue (Hayes 2008) being debated often unintentionally provided selective coverage of candidates on the issues they have specialized with. Focusing on issues that the party is assessed to best handle over the other, they attempt to increase their chances of electoral success in the election (Stubager 2018). Similar to how “going public” during a presidency often allows the executive to set the terms of negotiation and have the upper hand because of prestige, the party with the most important problem issue ownership goes public via repeated discussion of their strengths (in the eyes of the public).
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Overtime issue ownership can change, much as we saw Democrats become the party who is seen as handling civil rights change in the early 1980s. Change can occur when a party seen as best at handling an issue area is determined to have poor performance, or through party shifts and demographic shifts (Pope and Woon 2008a, 2008b). Other work has suggested that candidates ought to focus on their own issues unless they have both public opinion (Riker 1993) or a change in campaign/political environment that allows for an advantage seeking opportunity (Holbrook 1996). Additionally there is vast literature on economic voting and tally-counting over the past two decades (eg Wright 2012; Lewis-Beck et al 2004, 2007; Fiorina 1972).
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In sum, by focusing on issues they are deemed at better handling during campaigns, candidates can increase their electoral success. After winning the presidency, use of “going public” can often allow the President to control the narrative on the issues, while also pushing Congress to take action. Without action, the president is able to justify unilateral action that does not shock people because it was unpredictable—they knew the importance due to going public. Combined, these two factors are important to understanding how the President conditionally uses unilateral action to better his electoral chances, as well as mitigate consequences.
+
+
+##Initial Theory
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Christenson and Kriner (2017a, 2017b; henceforth CK) argue that partisanship and policy attitudes are the most important determinant of support for unilateral action. Reeves and Rogowski (henceforth RR) argue that abstract fear or distaste for unilateral action leads voters to all around, regardless of their policy attitude or partisanship, decrease support for a candidate. In agreement with CK, partisanship and policy attitudes when included in RR model will reduce, or negate the effects that voters punish candidates through their support due to abstract fear of unilateral action. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is in part due to the effect of issue ownership, as well as that RR model does not truly exclude partisanship from the experiment. If partisanship was not apart of the individual’s decision-making structure in the experiment, a spurious relationship between party affiliation and the policy attitudes should be present. The causal mechanism is that partisan affiliation is primed when talking about issue areas, and because parties own issue areas, their voters respond more positively to the issues. With a high correlation between the policy attitude and party affiliation, we then cannot accurately represent the predictability of just party affiliation—a caveat that my future theoretical contribution will address. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An observable implication example would be that Democratic individuals would support a Democrat using unilateral action on an issue owned by Democrats, compared to an issue owned by Republicans. In the theoretical models provided, there is no measure included that directly can test for issue ownership. That being said, I believe that tangentially that measure can be captured by the correlation values between party identification and policy attitudes of the observations.
+
+The original model provided in RR (2018):
+
+>0. support for candidate ~ treatment * policy attitude
+
+Proposed alternatives to this model:
+
+>1. support for candidate ~ treatment * policy attitude + partisanship
+
+>2. support for candidate ~ treatment + policy attitude + partisanship
+
+To capture the treatment effects of whether the candidate uses unilateral action or works with Congress (as seen in Figure 1 of the Appendix), I also include a table representing the differences in support. However, my model includes the differences broken down by party identification, which allows for a clearer understanding as to what groups punish the candidate most when using unilateral action. For the treatment, the alternative models are used on both the treatment group for legislative action, and unilateral action.
+
+###Hypotheses
+
+With the inclusion of party identification into the model proposed by Reeves and Rogowski (2018), there are new ideas to be tested. The hypotheses center around what the inclusion of party will do with the data and have been mentioned in the previous section. 
+
+>**H1:** *Party affiliation and policy attitudes are highly correlated and statistically significant.*
+
+>**H2:** *when including party affiliation in the logit model, the difference between the unilateral action treatment group support and legislative treatment group support will decrease in size.*
+
+>**H3:** *When including party affiliation in the logit model, the party who is most correlated with the policy attitude will have the smallest decrease in support for the candidate using unilateral action.* 
+
+The first hypothesis is testing the internal validity of the original experiment. Second, I am testing whether or not there is a decrease in the treatment effects when including party identification. Finally, the original relationship found in the previous model, where the highest policy supporters are the voters who punished the candidate most, is examined once party is included.
+
+
+##Preliminary Methods
+
+###Hypothesis 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##Future Theoretical Additions
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Presented is a first (and rough) draft of a theory that accompanies the debate between Christenson and Kriner, and Reeves and Rogowski. This disagreement revolves around the consequences or advantages of unilateral action. The summarization of this strain of literature is provided in the Literature Review section. On one side, it is argued that the President is benefitted by copartisans support when using unilateral action (Christenson and Kriner). The bulk of public opinion downfall coming from those who disagree with the policy, or disagree with the President’s partisanship.  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Opposite this argument is that the president suffers public support consequences when using unilateral action to achieve policy outcomes, no matter the issue and no matter the issue attitude of the individuals. This is the outcome of negative public opinion regarding unilateral action, where partisans also have negative views of the leader (Reeves and Rogowski). Development of a middle-of-the-road approach is the ultimate goal of the new theory provided.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Addressing the question: How does public opinion influence unilateral action by the president? I present a conditional argument under which the president makes calculations. The main factors that are apart of the calculus to use unilateral action or not: 
 
@@ -74,27 +180,7 @@ abstract: How does public opinion of unilateral action influence Presidential de
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; While these methods do not test the same variables, they do point to different conclusions on whether people punish presidents for unilateral action. By combining these two different frameworks, a more suitable theory to the conditions under which public support declines. Both theories ignore important tangible cases that could provide insight to how public opinion functions in real political environments. Addressed in my theory is the importance of partisan identification and political information, as well as testing within the context of actual executive orders by Presidents that undertake salient issues.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Finally, as described in-depth in a proposed research design section, I intend to use real-world examples of salient executive orders and public opinion polls to draw conclusions and analyze the theory put forward in this paper. From briefly looking over a few of the most important issues of the last quarter-century, there is reason to believe that the theory will hold true at face-value, but no conclusions can be drawn without methodological proof and analysis.
-
-
-
-
-##Relevant Literature
-
-####Unilateral Action and the Public
-
-
-
-
-
-####Public Appeals and Issue Ownership
-
-
-
-
-
-
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Finally, as described in-depth in a proposed research design section, I intend to use real-world examples of salient executive orders and public opinion polls to draw conclusions and analyze the theory put forward in this paper. From briefly looking over a few of the most important issues of the last quarter-century, there is reason to believe that the theory will hold true at face-value, but no conclusions can be drawn without methodological proof and analysis. Hypotheses will be offered for testing in the research design portion found later in the paper.
 
 
 
