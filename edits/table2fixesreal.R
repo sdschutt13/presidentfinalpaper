@@ -105,12 +105,20 @@ pred.alt1pot.cand<-augment(alt1pot.cand,
                               type.predict = "response",
                               newdata = val.pot.alt)
 
-val.pot.altTEST<- d %>%
+
+## DIFFERENCE ##
+
+val.pot.alt1diff<- d %>%
   expand(treatment2=0,pot.attitudes, pid3)
 
-pred.alt1pot.candTEST<-augment(alt1pot.cand,
+pred.alt1pot.canddiff<-augment(alt1pot.cand,
                            type.predict = "response",
-                           newdata = val.pot.altTEST)
+                           newdata = val.pot.alt1diff)
+
+
+
+pred.alt1pot.cand<-mutate(pred.alt1pot.cand, diff= pred.alt1pot.canddiff$.fitted - pred.alt1pot.cand$.fitted)
+pred.alt1pot.cand<-mutate(pred.alt1pot.cand, .se.fitdiff = pred.alt1pot.canddiff$.se.fit - pred.alt1pot.cand$.se.fit)
 
 #####
 # ALTERNATIVE MODEL 2 CANDIDATE POT #
@@ -227,6 +235,19 @@ pred.alt1tax.cand<-augment(alt1tax.cand,
                            type.predict = "response",
                            newdata = val.tax.alt)
 
+## DIFFERENCE ##
+
+val.tax.alt1diff<- d %>%
+  expand(treatment2=0,tax.attitudes, pid3)
+
+pred.alt1tax.canddiff<-augment(alt1tax.cand,
+                               type.predict = "response",
+                               newdata = val.tax.alt1diff)
+
+
+
+pred.alt1tax.cand<-mutate(pred.alt1tax.cand, diff= pred.alt1tax.canddiff$.fitted - pred.alt1tax.cand$.fitted)
+pred.alt1tax.cand<-mutate(pred.alt1tax.cand, .se.fitdiff= pred.alt1tax.canddiff$.se.fit - pred.alt1tax.cand$.se.fit)
 #####
 # ALTERNATIVE MODEL 2 CANDIDATE TAX #
 alt2tax.cand<-
@@ -335,13 +356,27 @@ alt1def.cand <-
     weights=oct2015wt1,
     family = binomial(link = "logit"))
 
-# CANDIDATE MODEL ALT 1 PREDICT TAX #
+# CANDIDATE MODEL ALT 1 PREDICT DEF #
 val.def.alt<- d %>%
   expand(treatment2=1,defense.attitudes, pid3)
 
 pred.alt1def.cand<-augment(alt1def.cand,
                            type.predict = "response",
                            newdata = val.def.alt)
+
+## DIFFERENCE ##
+
+val.def.alt1diff<- d %>%
+  expand(treatment2=0,defense.attitudes, pid3)
+
+pred.alt1def.canddiff<-augment(alt1def.cand,
+                               type.predict = "response",
+                               newdata = val.def.alt1diff)
+
+
+
+pred.alt1def.cand<-mutate(pred.alt1def.cand, diff= pred.alt1def.canddiff$.fitted - pred.alt1def.cand$.fitted)
+pred.alt1def.cand<-mutate(pred.alt1def.cand, .se.fitdiff= pred.alt1def.canddiff$.se.fit - pred.alt1def.cand$.se.fit)
 
 #####
 # ALTERNATIVE MODEL 2 CANDIDATE DEFENSE #
@@ -449,7 +484,7 @@ pred.alt1pot.cand %>% drop_na() %>%
       facet_wrap("pot.attitudes", ncol = 1, labeller = labeller("pot.attitudes" = labelpot)) +
       labs(y = "Probability of Support for Candidate", x = "Support for Marijuana Legalization") + 
       labs(color ="Party ID")+
-      labs(title = "Unilateral Action Use for Pot\n Support of Candidate", 
+      labs(title = "Unilateral Action Use for Pot\n Support of Candidate for ", 
            subtitle = "Alternative Model 1 Pot - Candidate")+
       scale_color_manual(limits= c("dem", "ind", "gop"), 
                          values = c("dodgerblue3", "purple3", "red4"), 
@@ -457,6 +492,28 @@ pred.alt1pot.cand %>% drop_na() %>%
       scale_x_discrete(limits= c("gop", "ind", "dem"),
                        breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
       theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        plot.title = element_text(size = 15, face="bold", hjust = 0.5),
+        plot.subtitle = element_text(size = 8))
+
+
+pred.alt1pot.cand %>% drop_na() %>%
+  ggplot() + 
+  aes(x = pid3, y = diff, color = pid3) + 
+  geom_pointrange(aes(ymin = diff - 1.96*.se.fitdiff,
+                      ymax = diff + 1.96*.se.fitdiff) )  + 
+  coord_flip() +
+  facet_wrap("pot.attitudes", ncol = 1, labeller = labeller("pot.attitudes" = labelpot)) +
+  labs(y = "Probability of Support for Candidate", x = "Support for Marijuana Legalization") + 
+  labs(color ="Party ID")+
+  labs(title = "Difference Between Unilateral and Legislative \n Support of Candidate for Pot", 
+       subtitle = "Alternative Model 1 Pot - Candidate")+
+  scale_color_manual(limits= c("dem", "ind", "gop"), 
+                     values = c("dodgerblue3", "purple3", "red4"), 
+                     labels = c("Democrats", "Independents", "Republicans")) +
+  scale_x_discrete(limits= c("gop", "ind", "dem"),
+                   breaks = c("0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "1")) +
+  theme(axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
         plot.title = element_text(size = 15, face="bold", hjust = 0.5),
         plot.subtitle = element_text(size = 8))
@@ -542,17 +599,17 @@ pred.alt2pot.hand %>% drop_na() %>%
 #########
 #####
 ## ALTERNATIVE 1 PREDICTED TAX CANDIDATE ##
-
+labeltax <- c("-2" = "Strongly Agree", "-1" = "Agree", "0" = "Neither", "1" = "Disagree", "2" = "Strongly disagree")
 pred.alt1tax.cand %>% drop_na() %>%
   ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
+  aes(x = pid3, y = diff, color = pid3) + 
+  geom_pointrange(aes(ymin = diff - 1.96*.se.fitdiff,
+                      ymax = diff + 1.96*.se.fitdiff) )  + 
   coord_flip() +
-  facet_wrap("tax.attitudes", ncol = 1, labeller = labeller("tax.attitudes" = labelpot)) +
+  facet_wrap("tax.attitudes", ncol = 1, labeller = labeller("tax.attitudes" = labeltax)) +
   labs(y = "Probability of Support for Candidate", x = "Support for Taxing Corporations") + 
   labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Tax\n Support of Candidate", 
+  labs(title = "Difference in Unilateral and Legislative\n Support of Candidate for Taxes", 
        subtitle = "Alternative Model 1 Taxes - Candidate")+
   scale_color_manual(limits= c("dem", "ind", "gop"), 
                      values = c("dodgerblue3", "purple3", "red4"), 
@@ -648,14 +705,14 @@ pred.alt2tax.hand %>% drop_na() %>%
 
 pred.alt1def.cand %>% drop_na() %>%
   ggplot() + 
-  aes(x = pid3, y = .fitted, color = pid3) + 
-  geom_pointrange(aes(ymin = .fitted - 1.96*.se.fit,
-                      ymax = .fitted + 1.96*.se.fit) )  + 
+  aes(x = pid3, y = diff, color = pid3) + 
+  geom_pointrange(aes(ymin = diff - 1.96*.se.fitdiff,
+                      ymax = diff + 1.96*.se.fitdiff) )  + 
   coord_flip() +
   facet_wrap("defense.attitudes", ncol = 1, labeller = labeller("defense.attitudes" = labelpot)) +
   labs(y = "Probability of Support for Candidate", x = "Support for Defense Spending") + 
   labs(color ="Party ID")+
-  labs(title = "Unilateral Action Use for Defense\n Support of Candidate", 
+  labs(title = "Difference in Unilateral and Legislative\n Support of Candidate for Defense", 
        subtitle = "Alternative Model 1 Defense - Candidate")+
   scale_color_manual(limits= c("dem", "ind", "gop"), 
                      values = c("dodgerblue3", "purple3", "red4"), 

@@ -88,13 +88,50 @@ d$pid.ind<-ifelse(d$pid.ind == 0, 1, 0)
 
 
 
-### CORRELATION ###
+### CORRELATION for Hypothesis 1 ###
 #####
-cor.test(d$pot.att, d$pid.dem, use="pairwise")
-cor.test(d$pot.att, d$pid.rep, use="pairwise")
-cor.test(d$pot.att, d$pid.ind, use="pairwise")
+## Chi Sqs on Hypothesis 1a ##
+chi.h1a<-chisq.test(d$pot.att, d$pid.dem)
+cor.h1a<-cor.test(d$pot.att, d$pid.dem, use="pairwise")
 
-cor.test(d$pot.candidate.binary, d$pid.dem)
-cor.test(d$pot.candidate.binary, d$pid.rep)
-cor.test(d$pot.candidate.binary, d$pid.ind)
+chi.dem.h1a<-chisq.test(d$pot.candidate.binary, d$pid.dem)
+cor.dem.h1a<-cor.test(d$pot.candidate.binary, d$pid.dem)
+
+
+## Chi Sqs on Hypothesis 1b ##
+chi.h1b<-chisq.test(d$tax.att, d$pid.dem)
+cor.h1b<-cor.test(d$tax.att, d$pid.dem, use="pairwise")
+
+chi.h1b.extra<-chisq.test(d$tax.att, d$pid.rep)
+cor.h1b.extra<-cor.test(d$tax.att, d$pid.rep, use="pairwise")
+
+chi.rep.h1b<-chisq.test(d$tax.candidate.binary, d$pid.rep)
+cor.rep.h1b<-cor.test(d$tax.candidate.binary, d$pid.rep)
+
+## Chi Sqs on Hypothesis 1c ##
+chi.h1c<-chisq.test(d$def.att, d$pid.dem)
+cor.h1c<-cor.test(d$def.att, d$pid.dem)
+
+chi.h1c.extra<-chisq.test(d$def.att, d$pid.rep)
+cor.h1c.extra<-cor.test(d$def.att, d$pid.rep)
+
+chi.dem.h1c<-chisq.test(d$defense.candidate.binary, d$pid.dem)
+cor.dem.h1c<-cor.test(d$defense.candidate.binary, d$pid.dem)
+
+
+### Logit for Hypothesis 2 ###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

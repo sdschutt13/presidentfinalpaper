@@ -15,6 +15,128 @@ abstract: How does unilateral action influence public opinion? Through increased
 
 ```{r setup, include=FALSE}
 
+## Hypothesis 1 Testing on Correlation ##
+## Sam Schutt 2019 ##
+
+
+
+### OPENING SET-UP ###
+#####
+packages_required <- c('foreign',
+                       'car',
+                       'SDMTools',
+                       'texreg',
+                       'plyr',
+                       'Zelig',
+                       'weights',
+                       'robust',
+                       'pander',
+                       'dplyr',
+                       'mice',
+                       'tidyr',
+                       'broom',
+                       'ggplot2')
+
+for (package in packages_required) {
+  if (!(package %in% installed.packages())) {
+    install.packages(package)
+  }
+}
+
+library(foreign)
+library(car)
+library(SDMTools)
+library(texreg)
+library(plyr)
+library(Zelig)
+library(weights)
+library(robust)
+library(pander)
+library(dplyr)
+library(mice)
+library(tidyr)
+library(broom)
+library(ggplot2)
+
+
+# LOAD IN DATA FROM GIT REPOSITORY #
+
+load(url("https://github.com/sdschutt13/presidentfinalpaper/raw/master/Replication%20data/RR-AJPS-taps-processed%20(3).RData"))
+d<-tapsData ##Faster to type every time, keeps original data safe
+
+
+
+
+
+
+
+### CODING TO SET UP CORRELATION ###
+#####
+## Attitude Binary Pot ##
+d$pot.att<-d$pot.attitudes
+d$pot.att<-ifelse(d$pot.att > 0, 1, 0)
+
+
+
+## Attitude Binary Tax ##
+d$tax.att<-d$tax.attitudes
+d$tax.att<-ifelse(d$tax.att < 0, 1, 0)
+
+
+## Attitude Binary Defense ##
+d$def.att<-d$defense.attitudes
+d$def.att<-ifelse(d$def.att > 0, 1, 0)
+
+#####
+## PID Binary ##
+## Binary PID DEM ##
+d$pid.dem<-d$pid7
+d$pid.dem<-ifelse(d$pid.dem > 1, 1, 0)
+
+## Binary PID Rep ##
+d$pid.rep<-d$pid7
+d$pid.rep<-ifelse(d$pid.rep < 1, 1, 0)
+
+## Binary PID Ind ##
+d$pid.ind<-d$pid7
+d$pid.ind<-ifelse(d$pid.ind == 0, 1, 0)
+
+
+
+
+
+### CORRELATION for Hypothesis 1 ###
+#####
+## Chi Sqs on Hypothesis 1a ##
+chi.h1a<-chisq.test(d$pot.att, d$pid.dem)
+cor.h1a<-cor.test(d$pot.att, d$pid.dem, use="pairwise")
+
+chi.dem.h1a<-chisq.test(d$pot.candidate.binary, d$pid.dem)
+cor.dem.h1a<-cor.test(d$pot.candidate.binary, d$pid.dem)
+
+
+## Chi Sqs on Hypothesis 1b ##
+chi.h1b<-chisq.test(d$tax.att, d$pid.dem)
+cor.h1b<-cor.test(d$tax.att, d$pid.dem, use="pairwise")
+
+chi.h1b.extra<-chisq.test(d$tax.att, d$pid.rep)
+cor.h1b.extra<-cor.test(d$tax.att, d$pid.rep, use="pairwise")
+
+chi.rep.h1b<-chisq.test(d$tax.candidate.binary, d$pid.rep)
+cor.rep.h1b<-cor.test(d$tax.candidate.binary, d$pid.rep)
+
+## Chi Sqs on Hypothesis 1c ##
+chi.h1c<-chisq.test(d$def.att, d$pid.dem)
+cor.h1c<-cor.test(d$def.att, d$pid.dem)
+
+chi.h1c.extra<-chisq.test(d$def.att, d$pid.rep)
+cor.h1c.extra<-cor.test(d$def.att, d$pid.rep)
+
+chi.dem.h1c<-chisq.test(d$defense.candidate.binary, d$pid.dem)
+cor.dem.h1c<-cor.test(d$defense.candidate.binary, d$pid.dem)
+
+
+
 ```
 ##Introduction
 
@@ -109,18 +231,31 @@ To capture the treatment effects of whether the candidate uses unilateral action
 
 With the inclusion of party identification into the model proposed by Reeves and Rogowski (2018), there are new ideas to be tested. The hypotheses center around what the inclusion of party will do with the data and have been mentioned in the previous section. 
 
->**H1:** *Party affiliation and policy attitudes are highly correlated and statistically significant.*
+>**H1:** *Party affiliation and policy attitudes are positively correlated and statistically significant.*
 
->**H2:** *when including party affiliation in the logit model, the difference between the unilateral action treatment group support and legislative treatment group support will decrease in size.*
+Policy Specific H1
 
->**H3:** *When including party affiliation in the logit model, the party who is most correlated with the policy attitude will have the smallest decrease in support for the candidate using unilateral action.* 
+>**H1a** *Democratic party affiliation is positively correlated and statistically signifcant with legalization of marijuana*
 
-The first hypothesis is testing the internal validity of the original experiment. Second, I am testing whether or not there is a decrease in the treatment effects when including party identification. Finally, the original relationship found in the previous model, where the highest policy supporters are the voters who punished the candidate most, is examined once party is included.
+>**H1b** *Democratic party affiliation is positively correlated and statistically significant with support for increasing taxes on corporations*
+
+>**H1c** *Democratic party affiliation is negatively correlated and statistically significant with support for increased spending on defense.* 
+
+>**H2:** *When including party affiliation in the logit model, the difference between the unilateral action treatment group support and legislative treatment group support will decrease in size.*
+
+
+The first hypothesis is testing the internal validity of the original experiment. Hypothesis 1a is included because I believe that marijuana legalization is owned by the Democratic Party, therefore it is a symbolic measurement of party affiliation when asking if they support a marijuana policy change, even if they disagree with legalization. Hypothesis 1b states that being a Democrat is positively correlated with wanting to increase taxes on large corporations. Hypothesis 1c argues that being a Democrat is negatively correlated with being supportive of increases to defense spending. The second hypothesis is testing whether or not there is a decrease in the treatment effects when including party identification. 
 
 
 ##Preliminary Methods
 
-###Hypothesis 1
+###Hypothesis 1a
+```{r hyp 1a graphics, echo=FALSE}
+
+pander(chi.h1a, caption="Chi-Square H1a")
+pander(cor.h1a, caption="Correlation H1a")
+
+```
 
 
 
@@ -128,22 +263,50 @@ The first hypothesis is testing the internal validity of the original experiment
 
 
 
+###Hypothesis 1b
+```{r hyp 1b graphics, echo=FALSE}
+pander(chi.h1b, caption="Chi-Square H1b")
+pander(cor.h1b, caption="Correlation H1b")
+
+
+```
 
 
 
+###Hypothesis 1c
+
+```{r hyp 1c graphics, echo=FALSE}
+pander(chi.h1c, caption="Chi-Square H1c")
+pander(cor.h1c, caption="Correlation H1c")
 
 
+```
+
+###Hypothesis 2
+
+Marijuana
+```{r hyp 2 pot graphics, echo=FALSE}
+logit.pot<-
 
 
+```
+
+Taxes
+```{r hyp 1c graphics, echo=FALSE}
+pander(chi.h1c, caption="Chi-Square H1c")
+pander(cor.h1c, caption="Correlation H1c")
 
 
+```
 
 
+Defense
+```{r hyp 1c graphics, echo=FALSE}
+pander(chi.h1c, caption="Chi-Square H1c")
+pander(cor.h1c, caption="Correlation H1c")
 
 
-
-
-
+```
 
 ##Future Theoretical Additions
 
